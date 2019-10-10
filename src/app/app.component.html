@@ -1,0 +1,131 @@
+<div class="document" (click)="hideAllTermSourceLists()">
+    <header class="document__header">
+        <h1 class="document__header__header-field document__title">
+            {{ content.document.title }}
+        </h1>
+        <details class="document__header__header-field document__author">
+            <summary class="document__author__header">
+                <h3>
+                    Author
+                </h3>
+            </summary>
+            <p>
+                {{ content.document.author }}
+            </p>
+        </details>
+        <details class="document__header__header-field document__modification-date-list">
+            <summary class="document__modification-date-list__header">
+                <h3>
+                    Modifications
+                </h3>
+            </summary>
+            <ul>
+                <li *ngFor="let item of content ['document']['modification-dates']">
+                    <p class="document__modification-date">
+                        {{ item }}
+                    </p>
+                </li>
+            </ul>
+        </details>
+        <details class="document__header__header-field document__potential-reviewer-list">
+            <summary class="document__potential-reviewer-list__header">
+                <h3>
+                    Potential reviewers
+                </h3>
+            </summary>
+            <ul>
+                <li *ngFor="let item of content['document']['potential-reviewers']">
+                    <p class="document__potential-reviewer">
+                        {{ item["name"] }}, {{ item["contact"] }}
+                    </p>
+                </li>
+            </ul>
+        </details>
+        <details class="document__header__header-field document__review-list">
+            <summary class="document__review-list__header">
+                <h3>
+                    Reviews
+                </h3>
+            </summary>
+            <ul>
+                <li *ngFor="let item of content['document']['reviews']">
+                    <p class="document__review">
+                        {{ review["reviewer"] }}, {{ review["date"] }}, {{ review["remarks"] }}
+                    </p>
+                </li>
+            </ul>
+        </details>
+        <ul class="document__header__header-field document__action-list">
+            <li class="document__action document__load-content-from-file-action">
+                <button class="document__action__button document__load-content-from-file-action__button"
+                    (click)="saveDataToFile()">
+                    Load from file...
+                </button>
+            </li>
+            <li class="document__action document__save-content-to-file-action">
+                <button class="document__action__button document__save-content-to-file-action__button"
+                    (click)="loadDataFromFile()">
+                    Save to file...
+                </button>
+            </li>
+        </ul>
+    </header>
+    <ul class="category-list">
+        <li class="category" *ngFor="let categoryContent of content['categories']">
+            <header class="category__header">
+                <h2 class="category__name">
+                    {{ categoryContent["name"] }}
+                </h2>
+                <ul class="category__action-list">
+                    <li>
+                        <button class="category__action category__remove-action"
+                            (click)="alert('NOT IMPLEMENTED YET');">
+                            ×
+                        </button>
+                    </li>
+                </ul>
+            </header>
+            <ul class="subcategory-list" *ngIf="categoryContent['subcategories'] !== undefined">
+                <li class="subcategory" *ngFor="let subcategoryContent of categoryContent['subcategories']">
+                    <header class="subcategory__header">
+                        <h3 class="subcategory__name">
+                            {{ subcategoryContent["name"] }}
+                        </h3>
+                        <ul class="subcategory__action-list">
+                            <li>
+                                <button class="subcategory__action subcategory__remove-action"
+                                    (click)="alert('NOT IMPLEMENTED YET');">
+                                    ×
+                                </button>
+                            </li>
+                        </ul>
+                    </header>
+                    <ul class="group-list" *ngIf="subcategoryContent['groups'] !== undefined">
+                        <li class="group" *ngFor="let groupContent of subcategoryContent['groups']">
+                            <header class="group__header">
+                                <h4 class="group__name">
+                                    {{ groupContent["name"] }}
+                                </h4>
+                                <ul class="group__action-list">
+                                    <li>
+                                        <button class="group__action group__remove-action"
+                                            (click)="alert('NOT IMPLEMENTED YET');">
+                                            ×
+                                        </button>
+                                    </li>
+                                </ul>
+                            </header>
+                            <ul class="term-list" *ngIf="groupContent['terms'] !== undefined">
+                                <li #term class="term" *ngFor="let termContent of groupContent['terms']"
+                                    (mouseenter)="alignElementToLeft(termActionListAndPropertyListContainer)"
+                                    [style.border]="termContent['experience'] + 'px solid black'">
+                                    <app-term [termContent]="termContent" [sources]="content['sources']"></app-term>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

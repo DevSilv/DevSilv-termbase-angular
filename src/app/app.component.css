@@ -1,0 +1,515 @@
+/* SHALL FALL INTO index.css */
+
+ul {
+    /* Get rid of default settings for unordered lists */
+
+    list-style: none;
+
+    padding-left: 0;
+}
+
+button {
+    /* Get rid of the default styling for buttons */
+
+    background-image: linear-gradient(rgb(240, 240, 240), rgb(209, 209, 209));
+    cursor: pointer;
+    border-radius: 0.25em;
+
+    border: 1px solid grey;
+    font-size: inherit;
+    padding: 0;
+}
+
+button:active {
+    background-image: linear-gradient(rgb(209, 209, 209), rgb(240, 240, 240));
+}
+
+select {
+    /* Get rid of the default styling for select elements */
+
+    border-radius: 0.25em;
+
+    border: 1px solid grey;
+}
+
+/* SHALL FALL INTO markup.css */
+
+.document__header {
+    display: block;
+}
+
+@media screen and (min-width: 1024px) {
+    .document__header {
+        /* A hack (alongside with the value "25%" below instead of "1fr")
+        so that the header columns will not change its width when toggling
+        displaying the summary element, as long as there is plain text
+        displayed in the header columns. */
+        word-wrap: break-word;
+
+        display: grid;
+        grid-template-columns: repeat(4, 25%);
+        grid-template-rows: repeat(3, auto);
+    }
+}
+
+.document__header__header-field {
+    border: 1px solid black;
+    padding: 0.2em;
+}
+
+.document__header__header-field h3 {
+    display: inline;
+}
+
+.document__title {
+    text-align: center;
+
+    /* Get rid of the border that is defined for all the fields in document's header */
+    border: none;
+
+    grid-column: 1 / 5;
+}
+
+.document__author__header,
+.document__modification-date-list__header,
+.document__potential-reviewer-list__header,
+.document__review-list__header {
+    cursor: pointer;
+}
+
+.document__action-list {
+    /* Get rid of the default margin for unordered lists */
+    margin: 0;
+    padding: 0.5em;
+
+    display: grid;
+    grid-template-columns: auto 1fr;
+    justify-items: left;
+    grid-column-gap: 0.5em;
+
+    grid-column: 1 / 5;
+}
+
+.document__action__button {
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+.document__action:active {
+    background-image: linear-gradient(rgb(209, 209, 209), rgb(240, 240, 240));
+}
+
+/* SHALL FALL INTO category.css */
+
+.category {
+    margin-top: 2em;
+    border-top: 8px solid grey;
+
+    /* Do not remove the following out-commented rule. Although currently the layout works as intended,
+    it is left for CSS stylesheet rules layout consistency. */
+    /* In order to properly position inner elements */
+    /* position: relative; */
+}
+
+.category__name {
+    /* Get rid of the default margin for level 2 heading */
+    margin-bottom: 0;
+    padding-bottom: 0.25em;
+}
+
+.category__action-list {
+    display: none;
+}
+
+.category__header {
+    /* For proper displaying content elements */
+    position: relative;
+}
+
+.category__header:hover .category__action-list {
+    /* TODO: I did not specify any "initial" value,
+    but it seems to behave properly... */
+    display: initial;
+    position: absolute;
+    top: 100%;
+}
+
+.category__action {
+    /* The property "font-size" applies only because
+    currently all the actions buttons contain
+    only characters (i.e. no images). */
+    font-size: 0.8em;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+}
+
+.category__header:hover .category__action {
+    opacity: 0.7;
+}
+
+.category__header:hover .category__action:hover {
+    opacity: 1.0;
+}
+
+/* SHALL FALL INTO subcategory.css */
+
+.subcategory {
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+
+    /* display: grid; */
+    /* I do not know how "minmax(0, auto)" works,
+    but it seems to work as expected... */
+    /* grid-template-columns: min-content minmax(0, auto); */
+    /* grid-template-rows: 1fr auto; */
+    /* align-items: baseline; */
+}
+
+.subcategory__name {
+    /* Get rid of the default margin for level 3 heading */
+    margin: 0;
+    border-bottom: 0.25em solid lightgrey;
+}
+
+.subcategory__action-list {
+    display: none;
+}
+
+.subcategory__header:hover .subcategory__action-list {
+    padding-top: 0.5em;
+
+    /* TODO: I did not specify any "initial" value,
+    but it seems to behave properly... */
+    display: initial;
+    position: absolute;
+}
+
+.subcategory__header:hover .subcategory__action {
+    opacity: 0.7;
+}
+
+.subcategory__action {
+    /* The property "font-size" applies only because
+    currently all the actions buttons contain
+    only characters (i.e. no images). */
+    font-size: 0.8em;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+}
+
+.subcategory__header:hover .subcategory__action:hover {
+    opacity: 1.0;
+}
+
+/* SHALL FALL INTO group.css */
+
+.group {
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+
+    display: grid;
+    /* I do not know how "minmax(0, auto)" works,
+    but it seems to work as expected... */
+    grid-template-columns: min-content minmax(0, auto);
+    grid-template-rows: 1fr auto;
+    align-items: baseline;
+}
+
+.group__name {
+    /* Get rid of the default margin for level 3 heading */
+    margin: 0;
+    /* In the following declarations, I concluded that it is
+    cleaner to declare the exact border value in one declaration
+    for all sides and later just remove it for specific sides,
+    instead of having the same value written in two declarations. */
+    border: 2px solid darkgrey;
+    border-top: none;
+    border-right: none;
+    padding: 0.25em;
+    padding-top: 0;
+    padding-right: 0;
+    border-bottom-left-radius: 0.25em;
+}
+
+.group__action-list {
+    display: none;
+}
+
+.group__header:hover .group__action-list {
+    padding-top: 0.5em;
+
+    /* TODO: I did not specify any "initial" value,
+    but it seems to behave properly... */
+    display: initial;
+    position: absolute;
+}
+
+.group__action {
+    /* The property "font-size" applies only because
+    currently all the actions buttons contain
+    only characters (i.e. no images). */
+    font-size: 0.8em;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+}
+
+.group__header:hover .group__action:hover {
+    opacity: 1.0;
+}
+
+/* SHALL FALL INTO term.css */
+
+.term-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.term {
+    border-radius: 0.25em;
+    background-color: rgb(240, 240, 240);
+
+    /* The magic constant "0.375" is from
+    assuming that 1em = 1rem = 16px,
+    therefore 0.375em = 6px (half-between
+    0.5em and 0.25em). */
+    margin-top: 0.375em;
+    margin-bottom: 0.375em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    padding: 0.25em;
+
+    /* The following declaration "position: relative"
+    is set for proper displaying the source list. */
+    position: relative;
+}
+
+.term--to-learn {
+    color: purple;
+}
+
+.term--project-done {
+    background-color: rgb(202, 202, 202);
+}
+
+/* Term's name */
+
+.term__name {
+    /* Get rid of the default margin for paragraphs */
+    margin: 0;
+}
+
+/* Term's sources */
+
+.term__source-list-container {
+    /* The same padding as term's name */
+    padding-top: 6px;
+    font-size: 0.8rem;
+
+    left: 0;
+    top: 100%;
+    display: none;
+    position: absolute;
+    z-index: 2;
+}
+
+.term__source-list {
+    background-color: rgb(236, 236, 236);
+    border-radius: 0.25em;
+    border: 1px solid grey;
+
+    max-width: 50vw;
+    max-height: 20vh;
+    overflow-y: scroll;
+    overflow-wrap: break-word;
+}
+
+@media screen and (min-width: 1024px) {
+    .term-source-list {
+        max-width: 30vw;
+    }
+}
+
+.term__source-list p {
+    margin: 0.25em;
+}
+
+.term__source-list li {
+    padding-bottom: 0.375em;
+    padding-top: 0.375em;
+    border-bottom: 1px solid black;
+}
+
+.term__source-list li:last-child {
+    border-bottom: none;
+}
+
+.term__action-list-and-property-list-container {
+    display: none;
+}
+
+.term:hover .term__action-list-and-property-list-container {
+    padding-bottom: 6px;
+    min-width: 100%;
+
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    z-index: 2;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: flex-end;
+}
+
+/* Term's properties */
+
+.term__property-list {
+    /* For some reason, setting the font size here
+    (instead of in the child elements) does not work
+    as expected. */
+    max-width: max-content;
+}
+
+.term__property {
+    background-color: rgb(236, 236, 236);
+    border-radius: 0.25em;
+    text-align: right;
+
+    line-height: 75%;
+    padding: 0.25em;
+    border: 1px solid grey;
+}
+
+.term__property__label {
+    margin-right: 0.5em;
+}
+
+.term__is-to-learn-property__label,
+.term__is-project-done-property__label {
+    font-size: 0.8em;
+
+    display: inline;
+}
+
+.term__experience-property__content,
+.term__is-to-learn-property__content,
+.term__is-project-done-property__content {
+    font-size: 0.8em;
+}
+
+/* Term's actions */
+
+.term__action-list {
+    font-size: 0.8em;
+
+    display: flex;
+    flex-direction: row;
+
+    justify-self: end;
+}
+
+.term__action__button {
+    margin-left: 0.25em;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+}
+
+/* SHALL FALL INTO new-item-form.css */
+
+.new-item-form {
+    background-color: rgb(236, 236, 236);
+    border-radius: 0.25em;
+
+    padding: 0.25em;
+    border: 1px solid grey;
+    /* I do not know fo sure whether there would be
+    more appropriate max-content or min-content below
+    because they seem to behave the same way in this
+    situation. */
+    max-width: max-content;
+
+    display: grid;
+    /* Grid columns width is approximately determined as:
+    minimum viewport width / 2 - some approximate width
+    for all additional left and right margins and paddings. */
+    grid-template-columns: repeat(2, calc(384px / 2 - 50px));
+    grid-row-gap: 0.25em;
+    grid-column-gap: 1em;
+    align-items: center;
+}
+
+.new-item-form-container--basic--right {
+    /* A hack for proper displaying the form
+    in its extended form. The value is chosen
+    "na oko" (with the settings more or less
+    default). */
+    height: 3em;
+
+    /* z-index: 1; */
+
+    grid-column: 2 / 3;
+    justify-self: end;
+}
+
+.new-item-form-container--full--right {
+    /* A hack for proper displaying the form
+    in its extended form. The value is chosen
+    "na oko" (with the settings more or less
+    default). */
+    height: 3em;
+
+    grid-column: 2 / 3;
+    justify-self: end;
+
+    z-index: 1;
+}
+
+.new-item-form--basic--right {
+    /* Do not remove this empty rule. Although currently the layout works as intended,
+    it is left for CSS stylesheet rules layout consistency. */
+}
+
+.new-item-form--full--right {
+    /* Do not remove this empty rule. Although currently the layout works as intended,
+    it is left for CSS stylesheet rules layout consistency. */
+}
+
+.new-item-form-container--basic--left {
+    /* Do not remove the following out-commented rules. Although currently the layout works as intended,
+    they are left for CSS stylesheet rules layout consistency. */
+    /* A hack for proper displaying of the form */
+    /* height: 2.75em; */
+    /* z-index: 1; */
+}
+
+.new-item-form-container--full--left {
+    z-index: 1;
+}
+
+.new-item-form--basic--left {
+    /* Do not remove this empty rule. Although currently the layout works as intended,
+    it is left for CSS stylesheet rules layout consistency. */
+}
+
+.new-item-form--full--left {
+    /* Do not remove this empty rule. Although currently the layout works as intended,
+    it is left for CSS stylesheet rules layout consistency. */
+}
+
+.new-item-form__field {
+    max-width: 150px;
+}
+
+.new-item-form__field--hidden {
+    display: none;
+}
+
+.new-item-form__field--aligned-left {
+    /* A hack for left-align of this particular inputs
+    because CSS grid, uknownly to me, causes text inputs
+    NOT TO shrink when aligned left explicitly. */
+    justify-self: left;
+}

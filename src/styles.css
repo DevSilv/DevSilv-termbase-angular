@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* SHALL FALL INTO index.css */
+
+body {
+    font-family: sans-serif;
+    /* Set margin so that the vertical bar does not interfere with document's content */
+    margin-left: 20px;
+    margin-right: 20px;
+}
