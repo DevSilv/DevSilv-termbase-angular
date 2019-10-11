@@ -1,82 +1,86 @@
-<p #termName
-    [ngClass]="['term__name', termContent['is-to-learn'] === true ? 'term--to-learn' : '', termContent['is-project-done'] === true ? 'term--project-done' : '']">
-    {{ termContent["name"] }}
-    <span *ngIf="termContent['other-names'].length > 0">
-        ({{ termContent["other-names"].join(",") }})
-    </span>
-</p>
-<div #termSourceListContainer class="term__source-list-container">
-    <ul #termSourceList class="term__source-list" (click)="$event.stopPropagation()">
-        <li class="term__source" *ngFor="let termSourceReference of termContent['sources']">
-            <ng-template [ngIf]="isNumber(termSourceReference)" [ngIfThen]="renderLink" [ngIfElse]="renderText">
-            </ng-template>
-            <ng-template #renderLink>
-                <a [href]="findTermSource(termSourceReference).uri">
-                    {{ findTermSource(termSourceReference).uri }}
-                </a>
-            </ng-template>
-            <ng-template #renderText>
-                <p>
-                    {{ termSourceReference }}
-                </p>
-            </ng-template>
-        </li>
-    </ul>
-</div>
-<div #termActionListAndPropertyListContainer class="term__action-list-and-property-list-container">
-    <ul class="term__property-list">
-        <li>
-            <div class="term__property term__experience-property">
-                <select class="term__experience-property__content"
-                    [selectedIndex]="getInitialSelectedIndex(termExperienceOptions, termContent['experience'])"
-                    (change)="term.style.border = getInitialSelectedIndex(termExperienceOptions, $event.target.selectedIndex) + 'px solid black'">
-                    <option *ngFor="let termExperienceOption of termExperienceOptions">
-                        {{ termExperienceOption.value }}
-                    </option>
-                </select>
-            </div>
-        </li>
-        <li>
-            <div class="term__property term__is-to-learn-property">
-                <h5 class="term__property__label term__is-to-learn-property__label">
-                    To learn:
-                </h5>
-                <!-- TODO: classList may not work in IE of version prior to 10 -->
-                <select class="term__is-to-learn-property__content"
-                    [selectedIndex]="getInitialSelectedIndex(termIsToLearnPropertyOptions, termContent['is-to-learn'])"
-                    (change)="termName.classList.toggle('term--to-learn')">
-                    <option *ngFor="let termIsToLearnPropertyOption of termIsToLearnPropertyOptions">
-                        {{ termIsToLearnPropertyOption.value }}
-                    </option>
-                </select>
-            </div>
-        </li>
-        <li>
-            <div class="term__property term__is-project-done-property">
-                <h5 class="term__property__label term__is-project-done-property__label">
-                    A project done:
-                </h5>
-                <select class="term__is-project-done-property__content"
-                    [selectedIndex]="getInitialSelectedIndex(termIsProjectDonePropertyOptions, termContent['is-project-done'])"
-                    (change)="termName.classList.toggle('term--project-done')">
-                    <option *ngFor="let termIsProjectDonePropertyOption of termIsProjectDonePropertyOptions">
-                        {{ termIsProjectDonePropertyOption.value }}
-                    </option>
-                </select>
-            </div>
-        </li>
-    </ul>
-    <ul class="term__action-list">
-        <li class="term__action term__toggle-sources-view-action">
-            <button class="term__action__button"
-                (click)="$event.stopPropagation(); termSourceListContainer.style.display = (termSourceListContainer.style.display === 'block' ? 'none' : 'block'); alignElementToRight(termSourceListContainer)">
-                Sources
-            </button>
-        </li>
-        <li class="term__action term__remove-action">
-            <button class="term__action__button" (click)="term.remove()">
-                ×
-            </button>
-        </li>
-    </ul>
-</div>
+<li #term
+    [ngClass]="['term', termContent['is-to-learn'] === true ? 'term--to-learn' : '', termContent['is-project-done'] === true ? 'term--project-done' : '']"
+    (mouseenter)="alignElementToLeft(termActionListAndPropertyListContainer)"
+    [style.border]="termContent['experience'] + 'px solid black'">
+    <p #termName class="term__name">
+        {{ termContent["name"] }}
+        <span *ngIf="termContent['other-names'].length > 0">
+            ({{ termContent["other-names"].join(",") }})
+        </span>
+    </p>
+    <div #termSourceListContainer class="term__source-list-container">
+        <ul #termSourceList class="term__source-list" (click)="$event.stopPropagation()">
+            <li class="term__source" *ngFor="let termSourceReference of termContent['sources']">
+                <ng-template [ngIf]="isNumber(termSourceReference)" [ngIfThen]="renderLink" [ngIfElse]="renderText">
+                </ng-template>
+                <ng-template #renderLink>
+                    <a [href]="findTermSource(termSourceReference).uri">
+                        {{ findTermSource(termSourceReference).uri }}
+                    </a>
+                </ng-template>
+                <ng-template #renderText>
+                    <p>
+                        {{ termSourceReference }}
+                    </p>
+                </ng-template>
+            </li>
+        </ul>
+    </div>
+    <div #termActionListAndPropertyListContainer class="term__action-list-and-property-list-container">
+        <ul class="term__property-list">
+            <li>
+                <div class="term__property term__experience-property">
+                    <select class="term__experience-property__content"
+                        [selectedIndex]="getInitialSelectedIndex(termExperienceOptions, termContent['experience'])"
+                        (change)="term.style.border = getInitialSelectedIndex(termExperienceOptions, $event.target.selectedIndex) + 'px solid black'">
+                        <option *ngFor="let termExperienceOption of termExperienceOptions">
+                            {{ termExperienceOption.value }}
+                        </option>
+                    </select>
+                </div>
+            </li>
+            <li>
+                <div class="term__property term__is-to-learn-property">
+                    <h5 class="term__property__label term__is-to-learn-property__label">
+                        To learn:
+                    </h5>
+                    <!-- TODO: classList may not work in IE of version prior to 10 -->
+                    <select class="term__is-to-learn-property__content"
+                        [selectedIndex]="getInitialSelectedIndex(termIsToLearnPropertyOptions, termContent['is-to-learn'])"
+                        (change)="term.classList.toggle('term--to-learn')">
+                        <option *ngFor="let termIsToLearnPropertyOption of termIsToLearnPropertyOptions">
+                            {{ termIsToLearnPropertyOption.value }}
+                        </option>
+                    </select>
+                </div>
+            </li>
+            <li>
+                <div class="term__property term__is-project-done-property">
+                    <h5 class="term__property__label term__is-project-done-property__label">
+                        A project done:
+                    </h5>
+                    <select class="term__is-project-done-property__content"
+                        [selectedIndex]="getInitialSelectedIndex(termIsProjectDonePropertyOptions, termContent['is-project-done'])"
+                        (change)="term.classList.toggle('term--project-done')">
+                        <option *ngFor="let termIsProjectDonePropertyOption of termIsProjectDonePropertyOptions">
+                            {{ termIsProjectDonePropertyOption.value }}
+                        </option>
+                    </select>
+                </div>
+            </li>
+        </ul>
+        <ul class="term__action-list">
+            <li class="term__action term__toggle-sources-view-action">
+                <button class="term__action__button"
+                    (click)="$event.stopPropagation(); termSourceListContainer.style.display = (termSourceListContainer.style.display === 'block' ? 'none' : 'block'); alignElementToRight(termSourceListContainer)">
+                    Sources
+                </button>
+            </li>
+            <li class="term__action term__remove-action">
+                <button class="term__action__button" (click)="term.remove()">
+                    ×
+                </button>
+            </li>
+        </ul>
+    </div>
+</li>

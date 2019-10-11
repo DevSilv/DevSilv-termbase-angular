@@ -116,11 +116,9 @@
                                 </ul>
                             </header>
                             <ul class="term-list" *ngIf="groupContent['terms'] !== undefined">
-                                <li #term class="term" *ngFor="let termContent of groupContent['terms']"
-                                    (mouseenter)="alignElementToLeft(termActionListAndPropertyListContainer)"
-                                    [style.border]="termContent['experience'] + 'px solid black'">
-                                    <app-term [termContent]="termContent" [sources]="content['sources']"></app-term>
-                                </li>
+                                <app-term [groupContent]="groupContent" [termContent]="termContent"
+                                    [sources]="content['sources']" *ngFor="let termContent of groupContent['terms']">
+                                </app-term>
                             </ul>
                         </li>
                     </ul>

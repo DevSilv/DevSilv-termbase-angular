@@ -50,33 +50,7 @@ export class AppComponent {
 
     return termSourceElement;
   };
-  alignElementToRight = function (element) {
-    const elementClientRects = element.getClientRects()[0];
-    if (elementClientRects) {
-      // For why this condition has to be true, see
-      //  https://developer.mozilla.org/en-US/docs/Web/API/Element/getClientRects#Return_value
-      const bodyElementClientRects
-        = document.getElementsByTagName("body")[0].getClientRects()[0];
-      if (
-        Math.floor(elementClientRects.right) - 20
-        > Math.floor(bodyElementClientRects.width)
-      ) {
-        element.style.left = `${
-          -(elementClientRects.right - bodyElementClientRects.width - 20)
-          }px`;
-      }
-    }
-  };
-  alignElementToLeft = function (element) {
-    const elementClientRects = element.getClientRects()[0];
-    if (elementClientRects.left < 0) {
-      element.style.right = `${
-        !element.style.right
-          ? elementClientRects.left - 20
-          : element.style.right - elementClientRects.left - 20
-        }px`;
-    }
-  }
+
   saveDataToFile = function () {
 
   };
